@@ -37,7 +37,8 @@
 // export default authSlice.reducer;
 
 
-
+const url = import.meta.env.VITE_URL;
+console.log(url);
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -52,7 +53,7 @@ const initialState = {
 // Define the loginUser async thunk
 export const loginUser = createAsyncThunk('auth/loginUser', async (details, { rejectWithValue }) => {
   try {
-    const response = await axios.post('http://localhost:8000/api/v2/users/login', details);
+    const response = await axios.post(`${url}/users/login`, details);
     console.log("Successfully Logged in")
     console.log(response)
     console.log(response.data)
@@ -67,7 +68,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (details, { re
 
 export const registerUser = createAsyncThunk('auth/Register',async(details)=>{
   try{
-    const response = await axios.post('http://localhost:8000/api/v2/users/register',details);
+    const response = await axios.post(`${url}/users/register`,details);
     console.log("Registration Successfull");
     console.log(response)
     return response.data;
